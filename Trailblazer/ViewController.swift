@@ -8,23 +8,37 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
 
     //MARK: Properties
+
+    @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var trailNameLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var photoImageView: UIImageView!
     
     @IBOutlet weak var trailDateLabel: UILabel!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    
+    static let descriptionPlaceholder = "Describe this desire line..."
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         // Handle the text field's user inputs through delegate callbacks.
         nameTextField.delegate = self
+        
+        // Handle the text view's user inputs through delegate callbacks.
+        descriptionTextView.delegate = self
+        descriptionTextView.text = ViewController.descriptionPlaceholder
+        descriptionTextView.textColor = UIColor.lightGray
+        
+        // Set up keyboard-triggered scrolling adjustments
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -63,13 +77,31 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         // Dismiss the picker.
         dismiss(animated: true, completion: nil)
     }
+    
+    //MARK: UITextViewDelegate
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        // Reset the text view properties for editing.
+        if textView.textColor == UIColor.lightGray {
+            textView.text = ""
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        // Display the default placeholder if the text view is empty.
+        if textView.text.isEmpty {
+            textView.text = ViewController.descriptionPlaceholder
+            textView.textColor = UIColor.lightGray
+        }
+    }
 
     //MARK: Actions
     
     // Allow the user to pick a photo from their photo library and add it to the trail.
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
         // Hide the keyboard.
-        nameTextField.resignFirstResponder()
+        self.view.endEditing(false)
         
         // UIImagePickerController is a view controller that lets a user pick media from their photo library.
         let imagePickerController = UIImagePickerController()
@@ -95,6 +127,29 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         trailDateLabel.text = dateFormatter.string(from: date)
     }
     
+    // Dismiss the keyboard upon non-keyboard touch down.
+    
+    
+    //MARK: Private Methods
+    
+    func adjustForKeyboard(notification: Notification) {
+        let userInfo = notification.userInfo!
+        
+        let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        
+        // Update the content view's bottom inset based on the presence of the keyboard.
+        if notification.name == Notification.Name.UIKeyboardWillHide {
+            scrollView.contentInset.bottom = 0
+            scrollView.contentOffset.y = 0
+        } else {
+            scrollView.contentInset.bottom = keyboardViewEndFrame.height
+            scrollView.contentOffset.y = keyboardViewEndFrame.height
+        }
+        
+        // Update the scroll indicator insets in order to avoid overlapping.
+        scrollView.scrollIndicatorInsets = scrollView.contentInset
+    }
     
 }
 
