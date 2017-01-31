@@ -24,9 +24,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GAO-kS-nIq">
-                                <rect key="frame" x="16" y="40" width="343" height="447.5"/>
+                                <rect key="frame" x="16" y="40" width="343" height="508.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default Trail Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AXS-XZ-5UG">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Default Trail Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evo-d8-ZYQ">
                                         <rect key="frame" x="101" y="0.0" width="141" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -35,7 +35,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Trail Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O32-dW-fHS">
                                         <rect key="frame" x="0.0" y="28.5" width="343" height="30"/>
                                         <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     </textField>
                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="GwI-fH-22f">
@@ -48,16 +48,34 @@
                                             <outletCollection property="gestureRecognizers" destination="2hi-Ts-fO7" appends="YES" id="vg1-Gn-aT9"/>
                                         </connections>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PkF-ze-bsj">
-                                        <rect key="frame" x="94.5" y="417.5" width="154" height="30"/>
-                                        <state key="normal" title="Set Default Trail Name"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCG-qw-c5p">
+                                        <rect key="frame" x="0.0" y="417.5" width="343" height="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Describe this desire line..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vEZ-lt-JqD">
+                                        <rect key="frame" x="0.0" y="442.5" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wy0-aY-Hzd">
+                                        <rect key="frame" x="0.0" y="480.5" width="343" height="28"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="Reset To Current Date"/>
                                         <connections>
-                                            <action selector="setDefaultLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MrX-1h-Fby"/>
+                                            <action selector="setDefaultDateLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mfq-W9-ebi"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="O32-dW-fHS" secondAttribute="trailing" id="INE-i4-3Zj"/>
+                                    <constraint firstItem="VCG-qw-c5p" firstAttribute="leading" secondItem="GAO-kS-nIq" secondAttribute="leading" id="SaF-Dd-tvN"/>
+                                    <constraint firstItem="vEZ-lt-JqD" firstAttribute="leading" secondItem="GAO-kS-nIq" secondAttribute="leading" id="bdt-OF-L3G"/>
+                                    <constraint firstAttribute="trailing" secondItem="VCG-qw-c5p" secondAttribute="trailing" id="cPE-nx-YgU"/>
+                                    <constraint firstAttribute="trailing" secondItem="vEZ-lt-JqD" secondAttribute="trailing" id="e3o-WB-k2P"/>
+                                    <constraint firstItem="wy0-aY-Hzd" firstAttribute="leading" secondItem="GAO-kS-nIq" secondAttribute="leading" id="rcC-vA-Y5W"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -71,7 +89,8 @@
                     <connections>
                         <outlet property="nameTextField" destination="O32-dW-fHS" id="KSl-zR-GjE"/>
                         <outlet property="photoImageView" destination="GwI-fH-22f" id="Y8D-Cc-xxm"/>
-                        <outlet property="trailNameLabel" destination="AXS-XZ-5UG" id="R7E-jS-VC8"/>
+                        <outlet property="trailDateLabel" destination="VCG-qw-c5p" id="JXX-0u-wO5"/>
+                        <outlet property="trailNameLabel" destination="evo-d8-ZYQ" id="Y6B-6g-BHq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

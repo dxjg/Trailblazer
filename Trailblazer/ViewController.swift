@@ -16,6 +16,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var photoImageView: UIImageView!
     
+    @IBOutlet weak var trailDateLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -63,11 +66,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
 
     //MARK: Actions
     
-    // Set the label to the default name.
-    @IBAction func setDefaultLabelText(_ sender: UIButton) {
-        trailNameLabel.text = "Default Trail Name"
-    }
-    
+    // Allow the user to pick a photo from their photo library and add it to the trail.
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
         // Hide the keyboard.
         nameTextField.resignFirstResponder()
@@ -82,5 +81,20 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         imagePickerController.delegate = self
         present(imagePickerController, animated: true, completion: nil)
     }
+  
+    // Set the date to the current date.
+    @IBAction func setDefaultDateLabelText(_ sender: UIButton) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .short
+        
+        let date = Date()
+        
+        // Set the format to the current locale based on the user's preferences.
+        dateFormatter.locale = Locale.autoupdatingCurrent
+        trailDateLabel.text = dateFormatter.string(from: date)
+    }
+    
+    
 }
 
