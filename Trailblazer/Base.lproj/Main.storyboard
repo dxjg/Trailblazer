@@ -18,7 +18,7 @@
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -40,7 +40,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                             </textField>
-                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="GwI-fH-22f">
+                                            <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="GwI-fH-22f">
                                                 <rect key="frame" x="8" y="66.5" width="359" height="359"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
@@ -123,7 +123,11 @@
                         <action selector="selectImageFromPhotoLibrary:" destination="BYZ-38-t0r" id="uey-8m-BGT"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="rdw-yp-N9I"/>
+                <tapGestureRecognizer id="rdw-yp-N9I">
+                    <connections>
+                        <action selector="dismissKeyboardOnTap:" destination="BYZ-38-t0r" id="pGC-y8-jQW"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>

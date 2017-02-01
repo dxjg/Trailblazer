@@ -127,8 +127,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         trailDateLabel.text = dateFormatter.string(from: date)
     }
     
-    // Dismiss the keyboard upon non-keyboard touch down.
-    
+    // Force the first responder to resign by tapping the outermost view.
+    @IBAction func dismissKeyboardOnTap(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(false)
+    }
     
     //MARK: Private Methods
     
