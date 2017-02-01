@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextViewDelegate {
 
-    //MARK: Properties
+    // MARK: Properties
 
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -46,7 +46,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: UITextFieldDelegate
+    // MARK: UITextFieldDelegate
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Hide the keyboard.
@@ -54,11 +54,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         return true
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        trailNameLabel.text = textField.text
-    }
-    
-    //MARK: UIImagePickerControllerDelegate
+    // MARK: UIImagePickerControllerDelegate
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         // Dismiss the picker if the user cancelled.
@@ -78,7 +74,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         dismiss(animated: true, completion: nil)
     }
     
-    //MARK: UITextViewDelegate
+    // MARK: UITextViewDelegate
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         // Reset the text view properties for editing.
@@ -96,7 +92,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         }
     }
 
-    //MARK: Actions
+    // MARK: Actions
     
     // Allow the user to pick a photo from their photo library and add it to the trail.
     @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
@@ -132,7 +128,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         self.view.endEditing(false)
     }
     
-    //MARK: Private Methods
+    // MARK: Private Methods
     
     func adjustForKeyboard(notification: Notification) {
         let userInfo = notification.userInfo!
