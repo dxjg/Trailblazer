@@ -23,7 +23,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     
     static let descriptionPlaceholder = "Describe this desire line..."
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +37,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
         // Set up keyboard-triggered scrolling adjustments
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillHide, object: nil)
-        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillShow, object: nil)
+//        notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -135,16 +135,15 @@ class ViewController: UIViewController, UITextFieldDelegate, UIImagePickerContro
     func adjustForKeyboard(notification: Notification) {
         let userInfo = notification.userInfo!
         
+        // Determining the keyboard's end frame view.
         let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        let keyboardViewEndFrame = self.view.convert(keyboardScreenEndFrame, from: self.view.window)
         
-        // Update the content view's bottom inset based on the presence of the keyboard.
+        // Update the content view's bottom inset based on the presence of the keyboard's view.
         if notification.name == Notification.Name.UIKeyboardWillHide {
             scrollView.contentInset.bottom = 0
-            scrollView.contentOffset.y = 0
         } else {
             scrollView.contentInset.bottom = keyboardViewEndFrame.height
-            scrollView.contentOffset.y = keyboardViewEndFrame.height
         }
         
         // Update the scroll indicator insets in order to avoid overlapping.
