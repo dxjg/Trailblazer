@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 class TrailTableViewController: UITableViewController {
 
@@ -17,8 +18,16 @@ class TrailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Load the sample data.
-        loadSamples()
+        // Use the edit button item provided by the table view controller.
+        navigationItem.leftBarButtonItem = editButtonItem
+        
+        // Load any saved trails, otherwise load sample data
+        if let savedTrails = loadTrails() {
+            trails += savedTrails
+        } else {
+            // Load the sample data.
+            loadSamples()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,25 +70,23 @@ class TrailTableViewController: UITableViewController {
         return cell
     }
 
-    /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
+            trails.remove(at: indexPath.row)
+            saveTrails()
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
 
     /*
     // Override to support rearranging the table view.
@@ -96,15 +103,57 @@ class TrailTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        
+        switch(segue.identifier ?? "") {
+            
+        case "AddItem":
+            os_log("Adding a new trail.", log: OSLog.default, type: .debug)
+            
+        case "ShowDetail":
+            guard let trailViewController = segue.destination as? TrailViewController else {
+                fatalError("Unexpected destination: \(segue.destination)")
+            }
+            
+            guard let selectedTrailCell = sender as? TrailTableViewCell else {
+                fatalError("Unexpected sender: \(sender)")
+            }
+            
+            guard let indexPath = tableView.indexPath(for: selectedTrailCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedTrail = trails[indexPath.row]
+            trailViewController.trail = selectedTrail
+            
+        default:
+            fatalError("Unexpected Segue Identifier: \(segue.identifier)")
+        }
     }
-    */
+    
+    // MARK: Actions
+    
+    @IBAction func unwindToTrailList(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? TrailViewController, let trail = sourceViewController.trail {
+            if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                // Update an existing meal.
+                trails[selectedIndexPath.row] = trail
+                tableView.reloadRows(at: [selectedIndexPath], with: .none)
+            } else {
+                // Add a new meal.
+                let newIndexPath = IndexPath(row: trails.count, section: 0)
+                
+                trails.append(trail)
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
+            
+            // Save the trails.
+            saveTrails()
+        }
+    }
 
     // MARK: Private Methods
     
@@ -113,19 +162,32 @@ class TrailTableViewController: UITableViewController {
         let photo2 = UIImage(named: "trail2")
         let photo3 = UIImage(named: "trail3")
         
-        guard let trail1 = Trail(name: "Brisk Run In Iceland", photo: photo1, date: Date() - 100000, description: "It was a pretty cold run.") else {
+        guard let trail1 = Trail(name: "Brisk Run In Iceland", photo: photo1, date: Date() - 100000, trailDescription: "It was a pretty cold run.", descriptionColor: UIColor.black) else {
             fatalError("Unable to instantiate trail1")
         }
         
-        guard let trail2 = Trail(name: "Through The Seashore", photo: photo2, date: Date(), description: "A sunny day; an invigorating workout!") else {
+        guard let trail2 = Trail(name: "Through The Seashore", photo: photo2, date: Date(), trailDescription: "A sunny day; an invigorating workout!", descriptionColor: UIColor.black) else {
             fatalError("Unable to instantiate trail2")
         }
         
-        guard let trail3 = Trail(name: "Just Another Run", photo: photo3, date: Date() + 50000, description: "I saw some great plants today") else {
+        guard let trail3 = Trail(name: "Just Another Run", photo: photo3, date: Date() + 50000, trailDescription: "I saw some great plants today", descriptionColor: UIColor.black) else {
             fatalError("Unable to instantiate trail2")
         }
         
         trails += [trail1, trail2, trail3]
+    }
+    
+    private func saveTrails() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(trails, toFile: Trail.ArchiveURL.path)
+        if isSuccessfulSave {
+            os_log("Trails successfully saved.", log: OSLog.default, type: .debug)
+        } else {
+            os_log("Failed to save trails...", log: OSLog.default, type: .error)
+        }
+    }
+    
+    private func loadTrails() -> [Trail]?  {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Trail.ArchiveURL.path) as? [Trail]
     }
     
 }

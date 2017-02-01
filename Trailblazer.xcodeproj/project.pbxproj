@@ -11,7 +11,7 @@
 		8215BD6A1E41934000F46A77 /* Trail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8215BD691E41934000F46A77 /* Trail.swift */; };
 		8215BD6E1E419E8900F46A77 /* TrailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8215BD6D1E419E8900F46A77 /* TrailTableViewController.swift */; };
 		82B86BE41E404C0100978BE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B86BE31E404C0100978BE0 /* AppDelegate.swift */; };
-		82B86BE61E404C0100978BE0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B86BE51E404C0100978BE0 /* ViewController.swift */; };
+		82B86BE61E404C0100978BE0 /* TrailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B86BE51E404C0100978BE0 /* TrailViewController.swift */; };
 		82B86BE91E404C0100978BE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82B86BE71E404C0100978BE0 /* Main.storyboard */; };
 		82B86BEB1E404C0100978BE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82B86BEA1E404C0100978BE0 /* Assets.xcassets */; };
 		82B86BEE1E404C0100978BE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82B86BEC1E404C0100978BE0 /* LaunchScreen.storyboard */; };
@@ -35,7 +35,7 @@
 		8215BD6D1E419E8900F46A77 /* TrailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrailTableViewController.swift; path = ../TrailTableViewController.swift; sourceTree = "<group>"; };
 		82B86BE01E404C0100978BE0 /* Trailblazer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Trailblazer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82B86BE31E404C0100978BE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		82B86BE51E404C0100978BE0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		82B86BE51E404C0100978BE0 /* TrailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailViewController.swift; sourceTree = "<group>"; };
 		82B86BE81E404C0100978BE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		82B86BEA1E404C0100978BE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		82B86BED1E404C0100978BE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -90,7 +90,7 @@
 			children = (
 				82B86C031E404C1700978BE0 /* Trailblazer.entitlements */,
 				82B86BE31E404C0100978BE0 /* AppDelegate.swift */,
-				82B86BE51E404C0100978BE0 /* ViewController.swift */,
+				82B86BE51E404C0100978BE0 /* TrailViewController.swift */,
 				8215BD691E41934000F46A77 /* Trail.swift */,
 				8215BD671E41924500F46A77 /* TrailTableViewCell.swift */,
 				8215BD6D1E419E8900F46A77 /* TrailTableViewController.swift */,
@@ -229,7 +229,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8215BD681E41924500F46A77 /* TrailTableViewCell.swift in Sources */,
-				82B86BE61E404C0100978BE0 /* ViewController.swift in Sources */,
+				82B86BE61E404C0100978BE0 /* TrailViewController.swift in Sources */,
 				8215BD6A1E41934000F46A77 /* Trail.swift in Sources */,
 				82B86BE41E404C0100978BE0 /* AppDelegate.swift in Sources */,
 				8215BD6E1E419E8900F46A77 /* TrailTableViewController.swift in Sources */,

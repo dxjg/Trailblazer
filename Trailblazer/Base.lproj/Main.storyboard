@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="VaG-HJ-KkO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fHr-fR-Zxc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Trail Table View Controller-->
+        <!--Your Meals-->
         <scene sceneID="h33-WW-6l7">
             <objects>
                 <tableViewController id="VaG-HJ-KkO" customClass="TrailTableViewController" customModule="Trailblazer" customModuleProvider="target" sceneMemberID="viewController">
@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mYb-LC-lVy" id="WaK-UF-8lq">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="row-6W-I0a">
@@ -64,6 +64,7 @@
                                     <outlet property="dateLabel" destination="jjL-D3-BRC" id="JY1-up-vNi"/>
                                     <outlet property="nameLabel" destination="WIy-wP-hXj" id="d4r-1f-1G4"/>
                                     <outlet property="photoImageView" destination="row-6W-I0a" id="oQN-YI-b1v"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ShowDetail" id="G54-vk-wz0"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -72,15 +73,22 @@
                             <outlet property="delegate" destination="VaG-HJ-KkO" id="tez-CT-DyW"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Your Meals" id="LYw-UJ-Ndg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="XOs-pV-jWq">
+                            <connections>
+                                <segue destination="vVv-gC-Vuh" kind="presentation" identifier="AddItem" id="4hu-fs-6JZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t0C-fx-Xem" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-721" y="139"/>
+            <point key="canvasLocation" x="478" y="139"/>
         </scene>
-        <!--View Controller-->
+        <!--New Trail-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Trailblazer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="TrailViewController" customModule="Trailblazer" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -90,10 +98,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ash-Rp-JGp">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="GAO-kS-nIq">
-                                        <rect key="frame" x="0.0" y="20" width="375" height="566"/>
+                                        <rect key="frame" x="0.0" y="8" width="375" height="566"/>
                                         <subviews>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Trail Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="O32-dW-fHS">
                                                 <rect key="frame" x="8" y="0.0" width="359" height="30"/>
@@ -149,10 +157,10 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="GAO-kS-nIq" firstAttribute="leading" secondItem="Ash-Rp-JGp" secondAttribute="leading" id="6Uw-K4-zdt"/>
-                                    <constraint firstAttribute="bottom" secondItem="GAO-kS-nIq" secondAttribute="bottom" id="bhA-dJ-rGh"/>
-                                    <constraint firstItem="GAO-kS-nIq" firstAttribute="top" secondItem="Ash-Rp-JGp" secondAttribute="top" constant="20" id="c1v-XJ-1pM"/>
-                                    <constraint firstAttribute="trailing" secondItem="GAO-kS-nIq" secondAttribute="trailing" id="rK1-Qb-wlW"/>
+                                    <constraint firstAttribute="trailing" secondItem="GAO-kS-nIq" secondAttribute="trailing" id="Doe-8x-aIf"/>
+                                    <constraint firstItem="GAO-kS-nIq" firstAttribute="leading" secondItem="Ash-Rp-JGp" secondAttribute="leading" id="Rga-SL-CSe"/>
+                                    <constraint firstItem="GAO-kS-nIq" firstAttribute="top" secondItem="Ash-Rp-JGp" secondAttribute="top" constant="8" id="bRY-uo-Zxr"/>
+                                    <constraint firstAttribute="bottom" secondItem="GAO-kS-nIq" secondAttribute="bottom" id="k4U-Mw-dbR"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -169,15 +177,29 @@
                             <outletCollection property="gestureRecognizers" destination="rdw-yp-N9I" appends="YES" id="lrP-nT-a2O"/>
                         </connections>
                     </view>
+                    <navigationItem key="navigationItem" title="New Trail" id="twq-As-sKd">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="lGy-3a-0p6">
+                            <connections>
+                                <action selector="cancel:" destination="BYZ-38-t0r" id="3hv-Rd-ekH"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="ySd-7w-lx2">
+                            <connections>
+                                <segue destination="QJe-7o-0J2" kind="unwind" unwindAction="unwindToTrailListWithSender:" id="GoO-fj-tk0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="descriptionTextView" destination="ecf-0L-c6m" id="pU4-YT-x19"/>
                         <outlet property="nameTextField" destination="O32-dW-fHS" id="KSl-zR-GjE"/>
                         <outlet property="photoImageView" destination="GwI-fH-22f" id="Y8D-Cc-xxm"/>
+                        <outlet property="saveButton" destination="ySd-7w-lx2" id="U3P-9e-aDV"/>
                         <outlet property="scrollView" destination="Ash-Rp-JGp" id="1Sp-1T-TSo"/>
                         <outlet property="trailDateLabel" destination="VCG-qw-c5p" id="JXX-0u-wO5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="QJe-7o-0J2" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="2hi-Ts-fO7">
                     <connections>
                         <action selector="selectImageFromPhotoLibrary:" destination="BYZ-38-t0r" id="uey-8m-BGT"/>
@@ -189,10 +211,49 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
+            <point key="canvasLocation" x="2126" y="139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="V4w-Ws-bpn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fHr-fR-Zxc" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xl0-wP-jKR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VaG-HJ-KkO" kind="relationship" relationship="rootViewController" id="Rds-go-0aJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qep-S1-AtJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-313" y="139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="dei-bw-1ul">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="vVv-gC-Vuh" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fmL-HQ-CFO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="NGN-1O-e2V"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6nR-7l-llh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1314" y="613"/>
         </scene>
     </scenes>
     <resources>
         <image name="defaultPhoto" width="540" height="540"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="G54-vk-wz0"/>
+    </inferredMetricsTieBreakers>
 </document>
