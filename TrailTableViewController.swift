@@ -8,12 +8,14 @@
 
 import UIKit
 import os.log
+import HealthKit
 
 class TrailTableViewController: UITableViewController {
 
     // MARK: Properties
     
     var trails = [Trail]()
+    let healthKitManager: HealthKitManager = HealthKitManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,9 @@ class TrailTableViewController: UITableViewController {
             // Load the sample data.
             loadSamples()
         }
+        
+        // Get permission to access HealthKit data.
+        getHealthKitPermission()
     }
 
     override func didReceiveMemoryWarning() {
@@ -139,15 +144,20 @@ class TrailTableViewController: UITableViewController {
     @IBAction func unwindToTrailList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? TrailViewController, let trail = sourceViewController.trail {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
-                // Update an existing meal.
+                // Update an existing trail.
                 trails[selectedIndexPath.row] = trail
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             } else {
-                // Add a new meal.
+                // Add a new trail.
                 let newIndexPath = IndexPath(row: trails.count, section: 0)
                 
                 trails.append(trail)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
+                
+                // Add the new trail data to HealthKit only if the new trail has a recorded distance.
+                if healthKitManager.isAuthorized(), let distance = trail.distance {
+                    healthKitManager.saveDistance(distance: distance, date: trail.date!)
+                }
             }
             
             // Save the trails.
@@ -188,6 +198,19 @@ class TrailTableViewController: UITableViewController {
     
     private func loadTrails() -> [Trail]?  {
         return NSKeyedUnarchiver.unarchiveObject(withFile: Trail.ArchiveURL.path) as? [Trail]
+    }
+    
+    private func getHealthKitPermission() {
+        // Seek permission through the HealthKitManager.
+        healthKitManager.authorizeHealthKit {
+            (authorized, error) -> Void in
+            if !authorized {
+                if error != nil {
+                    fatalError("An error occurred attempting to grant permissions.")
+                }
+                os_log("Permission denied.", log: OSLog.default, type: .debug)
+            }
+        }
     }
     
 }

@@ -16,6 +16,7 @@ class Trail: NSObject, NSCoding {
     var name: String
     var photo: UIImage?
     var date: Date?
+    var distance: Double?
     var trailDescription: String
     var descriptionColor: UIColor
     

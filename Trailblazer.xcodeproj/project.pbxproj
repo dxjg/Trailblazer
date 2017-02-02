@@ -18,6 +18,7 @@
 		82B86BF91E404C0100978BE0 /* TrailblazerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B86BF81E404C0100978BE0 /* TrailblazerTests.swift */; };
 		82B86C061E404C1700978BE0 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 82B86C051E404C1700978BE0 /* HealthKit.framework */; };
 		82C8F6F21E428C3300DCC55F /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82C8F6F11E428C3300DCC55F /* DatePickerViewController.swift */; };
+		82F17AD41E43B9F300367510 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82F17AD31E43B9F300367510 /* HealthKitManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		82B86C031E404C1700978BE0 /* Trailblazer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Trailblazer.entitlements; sourceTree = "<group>"; };
 		82B86C051E404C1700978BE0 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		82C8F6F11E428C3300DCC55F /* DatePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
+		82F17AD31E43B9F300367510 /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 				8215BD671E41924500F46A77 /* TrailTableViewCell.swift */,
 				8215BD6D1E419E8900F46A77 /* TrailTableViewController.swift */,
 				82C8F6F11E428C3300DCC55F /* DatePickerViewController.swift */,
+				82F17AD31E43B9F300367510 /* HealthKitManager.swift */,
 				82B86BE71E404C0100978BE0 /* Main.storyboard */,
 				82B86BEA1E404C0100978BE0 /* Assets.xcassets */,
 				82B86BEC1E404C0100978BE0 /* LaunchScreen.storyboard */,
@@ -236,6 +239,7 @@
 				82C8F6F21E428C3300DCC55F /* DatePickerViewController.swift in Sources */,
 				8215BD6A1E41934000F46A77 /* Trail.swift in Sources */,
 				82B86BE41E404C0100978BE0 /* AppDelegate.swift in Sources */,
+				82F17AD41E43B9F300367510 /* HealthKitManager.swift in Sources */,
 				8215BD6E1E419E8900F46A77 /* TrailTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
