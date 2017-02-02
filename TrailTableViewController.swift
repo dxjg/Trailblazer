@@ -103,7 +103,7 @@ class TrailTableViewController: UITableViewController {
     }
     */
 
-    // MARK: - Navigation
+    // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)

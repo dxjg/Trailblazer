@@ -23,7 +23,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mYb-LC-lVy" id="WaK-UF-8lq">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="89"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="row-6W-I0a">
@@ -135,14 +135,27 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wy0-aY-Hzd">
-                                                <rect key="frame" x="120" y="538" width="135" height="28"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                <state key="normal" title="Reset To Current Date"/>
-                                                <connections>
-                                                    <action selector="setDefaultDateLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mfq-W9-ebi"/>
-                                                </connections>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Bhm-kZ-wp4">
+                                                <rect key="frame" x="89.5" y="538" width="196" height="28"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hu-Gj-OJl">
+                                                        <rect key="frame" x="0.0" y="0.0" width="53" height="28"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <state key="normal" title="Set Date"/>
+                                                        <connections>
+                                                            <segue destination="3e1-Fl-yDH" kind="presentation" id="oDz-10-cHU"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wy0-aY-Hzd">
+                                                        <rect key="frame" x="61" y="0.0" width="135" height="28"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <state key="normal" title="Reset To Current Date"/>
+                                                        <connections>
+                                                            <action selector="setDefaultDateLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mfq-W9-ebi"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="ecf-0L-c6m" secondAttribute="trailing" constant="8" id="3nK-Pc-o9O"/>
@@ -195,6 +208,7 @@
                         <outlet property="photoImageView" destination="GwI-fH-22f" id="Y8D-Cc-xxm"/>
                         <outlet property="saveButton" destination="ySd-7w-lx2" id="U3P-9e-aDV"/>
                         <outlet property="scrollView" destination="Ash-Rp-JGp" id="1Sp-1T-TSo"/>
+                        <outlet property="setDateButton" destination="5hu-Gj-OJl" id="7fw-2q-uhP"/>
                         <outlet property="trailDateLabel" destination="VCG-qw-c5p" id="JXX-0u-wO5"/>
                     </connections>
                 </viewController>
@@ -212,6 +226,65 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2126" y="139"/>
+        </scene>
+        <!--Date Picker View Controller-->
+        <scene sceneID="9YA-t7-Cu2">
+            <objects>
+                <viewController id="5Ph-aF-046" customClass="DatePickerViewController" customModule="Trailblazer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7V4-ok-ngC"/>
+                        <viewControllerLayoutGuide type="bottom" id="KLS-e9-WoF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BGr-0q-uHa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="s4h-jv-aWS">
+                                <rect key="frame" x="0.0" y="226" width="375" height="216"/>
+                                <subviews>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="k3a-bu-93u">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="216"/>
+                                        <date key="date" timeIntervalSinceReferenceDate="507676232.70089602">
+                                            <!--2017-02-01 21:10:32 +0000-->
+                                        </date>
+                                        <connections>
+                                            <action selector="datePickerChanged:" destination="5Ph-aF-046" eventType="valueChanged" id="1tP-fn-trC"/>
+                                        </connections>
+                                    </datePicker>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="k3a-bu-93u" firstAttribute="leading" secondItem="s4h-jv-aWS" secondAttribute="leading" id="byL-S2-ZDr"/>
+                                    <constraint firstAttribute="trailing" secondItem="k3a-bu-93u" secondAttribute="trailing" id="kMs-c2-daC"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="s4h-jv-aWS" firstAttribute="leading" secondItem="BGr-0q-uHa" secondAttribute="leading" id="QbW-od-cSi"/>
+                            <constraint firstItem="s4h-jv-aWS" firstAttribute="centerY" secondItem="BGr-0q-uHa" secondAttribute="centerY" id="gI7-dR-1Do"/>
+                            <constraint firstAttribute="trailing" secondItem="s4h-jv-aWS" secondAttribute="trailing" id="mT0-tM-lwM"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="BKB-Zb-F0f">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="uMR-AH-J3n">
+                            <connections>
+                                <action selector="cancel:" destination="5Ph-aF-046" id="Lbx-64-oQI"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="YAM-oo-VZm">
+                            <connections>
+                                <segue destination="Bun-2X-FV2" kind="unwind" unwindAction="unwindToTrailWithSender:" id="UDh-vL-EX0"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="k3a-bu-93u" id="CYS-x1-oec"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5zx-pd-x4l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Bun-2X-FV2" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="3732" y="139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="V4w-Ws-bpn">
@@ -249,11 +322,29 @@
             </objects>
             <point key="canvasLocation" x="1314" y="613"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="miX-kt-1bX">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3e1-Fl-yDH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="b22-HP-wdl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="5Ph-aF-046" kind="relationship" relationship="rootViewController" id="UqT-PF-KVn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yfZ-xC-1zZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2925.5999999999999" y="138.98050974512745"/>
+        </scene>
     </scenes>
     <resources>
         <image name="defaultPhoto" width="540" height="540"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="G54-vk-wz0"/>
+        <segue reference="NGN-1O-e2V"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -25,6 +25,7 @@ class TrailViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet weak var descriptionTextView: UITextView!
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var setDateButton: UIButton!
     
     /*
     This value is either passed by `TrailTableViewController` in `prepare(for:sender:)`
@@ -46,7 +47,7 @@ class TrailViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         descriptionTextView.textColor = UIColor.lightGray
         
         // Set up the date formatter.
-        dateFormatter.dateStyle = .medium
+        dateFormatter.dateStyle = .long
         dateFormatter.timeStyle = .short
         dateFormatter.locale = Locale.autoupdatingCurrent
         
@@ -150,18 +151,21 @@ class TrailViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         super.prepare(for: segue, sender: sender)
         
         // Configure the destination view controller only when the save button is pressed.
-        guard let button = sender as? UIBarButtonItem, button === saveButton else {
-            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
-            return
+        if let button = sender as? UIBarButtonItem, button === saveButton {
+            let name = nameTextField.text ?? ""
+            let photo = photoImageView.image
+            let date = trailDate ?? Date()
+            let trailDescription = descriptionTextView.text ?? TrailViewController.descriptionPlaceholder
+            let descriptionColor = descriptionTextView.textColor ?? UIColor.lightGray
+            
+            trail = Trail(name: name, photo: photo, date: date, trailDescription: trailDescription, descriptionColor: descriptionColor)
+        } else if let button = sender as? UIButton, button === setDateButton {
+            // Do not need to do anything.
+        } else {
+            fatalError("An unexpected segue was requested: \(segue.destination)")
         }
         
-        let name = nameTextField.text ?? ""
-        let photo = photoImageView.image
-        let date = trailDate ?? Date()
-        let trailDescription = descriptionTextView.text ?? TrailViewController.descriptionPlaceholder
-        let descriptionColor = descriptionTextView.textColor ?? UIColor.lightGray
         
-        trail = Trail(name: name, photo: photo, date: date, trailDescription: trailDescription, descriptionColor: descriptionColor)
     }
 
     // MARK: Actions
@@ -193,6 +197,16 @@ class TrailViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     // Force the first responder to resign by tapping the outermost view.
     @IBAction func dismissKeyboardOnTap(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(false)
+    }
+    
+    // Check if this works
+    @IBAction func unwindToTrail(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? DatePickerViewController, let date = sourceViewController.date {
+            // Set the date according to the user's selection.
+            trailDate = date
+            trailDateLabel.text = dateFormatter.string(from: date)
+            updateSaveButtonState()
+        }
     }
     
     // MARK: Helper Methods
