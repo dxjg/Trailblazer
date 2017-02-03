@@ -31,11 +31,12 @@ class Trail: NSObject, NSCoding {
         static let name = "name"
         static let photo = "photo"
         static let date = "date"
+        static let distance = "distance"
         static let trailDescription = "description"
         static let descriptionColor = "descriptionColor"
     }
     
-    init?(name: String, photo: UIImage?, date: Date, trailDescription: String, descriptionColor: UIColor) {
+    init?(name: String, photo: UIImage?, date: Date, distance: Double?, trailDescription: String, descriptionColor: UIColor) {
         // The name cannot be empty.
         guard !name.isEmpty else {
             return nil
@@ -45,6 +46,7 @@ class Trail: NSObject, NSCoding {
         self.name = name
         self.photo = photo
         self.date = date
+        self.distance = distance
         self.trailDescription = trailDescription
         self.descriptionColor = descriptionColor
     }
@@ -55,6 +57,7 @@ class Trail: NSObject, NSCoding {
         aCoder.encode(name, forKey: PropertyKey.name)
         aCoder.encode(photo, forKey: PropertyKey.photo)
         aCoder.encode(date, forKey: PropertyKey.date)
+        aCoder.encode(distance, forKey: PropertyKey.distance)
         aCoder.encode(trailDescription, forKey: PropertyKey.trailDescription)
         aCoder.encode(descriptionColor, forKey: PropertyKey.descriptionColor)
     }
@@ -66,7 +69,7 @@ class Trail: NSObject, NSCoding {
             return nil
         }
         
-        // Because photo is an optional property of Meal, just use conditional cast.
+        // Because photo is an optional property of Trail, just use conditional cast.
         let photo = aDecoder.decodeObject(forKey: PropertyKey.photo) as? UIImage
         
         // The date is required. If we cannot decode a date object, the initializer should fail.
@@ -75,12 +78,18 @@ class Trail: NSObject, NSCoding {
             return nil
         }
         
+        // If the saved distance is decoded to be 0, then consider that an invalid distance so set distance to nil.
+        var distance: Double? = aDecoder.decodeDouble(forKey: PropertyKey.distance)
+        if distance == 0 {
+            distance = nil
+        }
+        
         let trailDescription = aDecoder.decodeObject(forKey: PropertyKey.trailDescription) as? String ?? TrailViewController.descriptionPlaceholder
         
         let descriptionColor = aDecoder.decodeObject(forKey: PropertyKey.descriptionColor) as? UIColor ?? UIColor.lightGray
         
         // Must call designated initializer.
-        self.init(name: name, photo: photo, date: date, trailDescription: trailDescription, descriptionColor: descriptionColor)
+        self.init(name: name, photo: photo, date: date, distance: distance, trailDescription: trailDescription, descriptionColor: descriptionColor)
     }
     
 }

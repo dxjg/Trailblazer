@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fHr-fR-Zxc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ABb-2O-ljS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -136,7 +137,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Bhm-kZ-wp4">
-                                                <rect key="frame" x="89.5" y="538" width="196" height="28"/>
+                                                <rect key="frame" x="39.5" y="538" width="296" height="28"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hu-Gj-OJl">
                                                         <rect key="frame" x="0.0" y="0.0" width="53" height="28"/>
@@ -152,6 +153,14 @@
                                                         <state key="normal" title="Reset To Current Date"/>
                                                         <connections>
                                                             <action selector="setDefaultDateLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mfq-W9-ebi"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofK-74-sEg">
+                                                        <rect key="frame" x="204" y="0.0" width="92" height="28"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                        <state key="normal" title="Add a Distance"/>
+                                                        <connections>
+                                                            <segue destination="ABb-2O-ljS" kind="presentation" id="VVa-c4-6zx"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -203,6 +212,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addDistanceButton" destination="ofK-74-sEg" id="eVn-q9-k2A"/>
                         <outlet property="descriptionTextView" destination="ecf-0L-c6m" id="pU4-YT-x19"/>
                         <outlet property="nameTextField" destination="O32-dW-fHS" id="KSl-zR-GjE"/>
                         <outlet property="photoImageView" destination="GwI-fH-22f" id="Y8D-Cc-xxm"/>
@@ -339,6 +349,99 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yfZ-xC-1zZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2925.5999999999999" y="138.98050974512745"/>
+        </scene>
+        <!--Distance-->
+        <scene sceneID="Woa-Ta-DR9">
+            <objects>
+                <viewController id="RIT-nj-imj" customClass="DistanceViewController" customModule="Trailblazer" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FfY-iX-SnV"/>
+                        <viewControllerLayoutGuide type="bottom" id="oEf-3w-bGq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="YDY-rf-p62">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="XFn-zu-9ig">
+                                <rect key="frame" x="16" y="300" width="343" height="67"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Distance (mi.)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yKr-zq-avF">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="29"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Distance" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="izK-8W-y8O">
+                                        <rect key="frame" x="0.0" y="37" width="343" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailingMargin" secondItem="yKr-zq-avF" secondAttribute="trailing" id="8Ah-5q-7z4"/>
+                                    <constraint firstItem="izK-8W-y8O" firstAttribute="leading" secondItem="XFn-zu-9ig" secondAttribute="leadingMargin" id="S3w-Sq-jOE"/>
+                                    <constraint firstItem="yKr-zq-avF" firstAttribute="leading" secondItem="XFn-zu-9ig" secondAttribute="leadingMargin" id="ua0-YO-lHM"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="izK-8W-y8O" secondAttribute="trailing" id="xdg-KB-BKi"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="XFn-zu-9ig" firstAttribute="leading" secondItem="YDY-rf-p62" secondAttribute="leadingMargin" id="48y-2H-bS5"/>
+                            <constraint firstItem="XFn-zu-9ig" firstAttribute="centerY" secondItem="YDY-rf-p62" secondAttribute="centerY" id="PwT-OC-wfo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="XFn-zu-9ig" secondAttribute="trailing" id="THj-kK-1iM"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="OM2-qG-0d7" appends="YES" id="GqQ-cW-zi1"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" title="Distance" id="bjJ-8W-yRv">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="qUU-Gj-tm4">
+                            <connections>
+                                <action selector="cancel:" destination="RIT-nj-imj" id="8Te-5Q-MjP"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="4r9-DU-gOG">
+                            <connections>
+                                <segue destination="Skz-s6-1vX" kind="unwind" unwindAction="unwindToTrailWithSender:" id="aM7-Ht-8GX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="distanceLabel" destination="yKr-zq-avF" id="8NQ-sb-3kK"/>
+                        <outlet property="distanceTextField" destination="izK-8W-y8O" id="udu-eX-ifK"/>
+                        <outlet property="saveButton" destination="4r9-DU-gOG" id="T6s-10-ddu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dca-1Q-4kl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Skz-s6-1vX" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="OM2-qG-0d7">
+                    <connections>
+                        <action selector="dismissKeyboardOnTap:" destination="RIT-nj-imj" id="Aiu-dp-fYJ"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="3732" y="901"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cLN-wf-Hcd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ABb-2O-ljS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nee-V6-h8x">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="RIT-nj-imj" kind="relationship" relationship="rootViewController" id="2jz-gO-wIi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eMM-60-x4t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2926" y="901"/>
         </scene>
     </scenes>
     <resources>

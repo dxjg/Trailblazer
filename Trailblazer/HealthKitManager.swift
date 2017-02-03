@@ -31,11 +31,7 @@ class HealthKitManager {
     func authorizeHealthKit(completion: ((Bool, Error?) -> Void)?) {
         // Devices that do not provide HealthKit data have nothing to authorize.
         guard HKHealthStore.isHealthDataAvailable() else {
-            os_log("Cannot access HealthKit")
-            if let completion = completion {
-                completion(false, nil)
-            }
-            return
+            fatalError("HealthKit is unavailable on this device.")
         }
         
         // State the health data type(s) we want to write from HealthKit.
@@ -44,7 +40,7 @@ class HealthKitManager {
         }
         
         let healthDataToWrite: Set = [distanceWalkingRunningIdentifier]
-    
+        
         // Request authorization to read and/or write the specific data.
         healthKitHealthStore.requestAuthorization(toShare: healthDataToWrite, read: nil) {
             (authorized, error) -> Void in
@@ -75,5 +71,4 @@ class HealthKitManager {
             }
         })
     }
-    
 }

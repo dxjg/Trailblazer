@@ -23,6 +23,7 @@ class TrailTableViewController: UITableViewController {
         // Use the edit button item provided by the table view controller.
         navigationItem.leftBarButtonItem = editButtonItem
         
+        
         // Load any saved trails, otherwise load sample data
         if let savedTrails = loadTrails() {
             trails += savedTrails
@@ -30,7 +31,7 @@ class TrailTableViewController: UITableViewController {
             // Load the sample data.
             loadSamples()
         }
-        
+
         // Get permission to access HealthKit data.
         getHealthKitPermission()
     }
@@ -40,7 +41,7 @@ class TrailTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    // MARK: - Table view data source
+    // MARK: Table View Data Sources
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -92,21 +93,6 @@ class TrailTableViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
 
     // MARK: Navigation
 
@@ -172,15 +158,15 @@ class TrailTableViewController: UITableViewController {
         let photo2 = UIImage(named: "trail2")
         let photo3 = UIImage(named: "trail3")
         
-        guard let trail1 = Trail(name: "Brisk Run In Iceland", photo: photo1, date: Date() - 100000, trailDescription: "It was a pretty cold run.", descriptionColor: UIColor.black) else {
+        guard let trail1 = Trail(name: "Brisk Run In Iceland", photo: photo1, date: Date() - 100000, distance: nil, trailDescription: "It was a pretty cold run.", descriptionColor: UIColor.black) else {
             fatalError("Unable to instantiate trail1")
         }
         
-        guard let trail2 = Trail(name: "Through The Seashore", photo: photo2, date: Date(), trailDescription: "A sunny day; an invigorating workout!", descriptionColor: UIColor.black) else {
+        guard let trail2 = Trail(name: "Through The Seashore", photo: photo2, date: Date(), distance: 6.3, trailDescription: "A sunny day; an invigorating workout!", descriptionColor: UIColor.black) else {
             fatalError("Unable to instantiate trail2")
         }
         
-        guard let trail3 = Trail(name: "Just Another Run", photo: photo3, date: Date() + 50000, trailDescription: "I saw some great plants today", descriptionColor: UIColor.black) else {
+        guard let trail3 = Trail(name: "Just Another Run", photo: photo3, date: Date() + 50000, distance: 5.0,trailDescription: "I saw some great plants today", descriptionColor: UIColor.black) else {
             fatalError("Unable to instantiate trail2")
         }
         
@@ -192,7 +178,7 @@ class TrailTableViewController: UITableViewController {
         if isSuccessfulSave {
             os_log("Trails successfully saved.", log: OSLog.default, type: .debug)
         } else {
-            os_log("Failed to save trails...", log: OSLog.default, type: .error)
+            os_log("Failed to save trails.", log: OSLog.default, type: .error)
         }
     }
     
@@ -212,5 +198,4 @@ class TrailTableViewController: UITableViewController {
             }
         }
     }
-    
 }

@@ -35,5 +35,7 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Allows you to add photos to your trails.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>Allows you to save your distance data to your HealthKit store.</string>
 </dict>
 </plist>
