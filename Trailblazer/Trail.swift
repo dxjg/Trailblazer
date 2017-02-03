@@ -78,11 +78,7 @@ class Trail: NSObject, NSCoding {
             return nil
         }
         
-        // If the saved distance is decoded to be 0, then consider that an invalid distance so set distance to nil.
-        var distance: Double? = aDecoder.decodeDouble(forKey: PropertyKey.distance)
-        if distance == 0 {
-            distance = nil
-        }
+        let distance = aDecoder.decodeObject(forKey: PropertyKey.distance) as? Double
         
         let trailDescription = aDecoder.decodeObject(forKey: PropertyKey.trailDescription) as? String ?? TrailViewController.descriptionPlaceholder
         
