@@ -31,7 +31,6 @@ class TrailViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet weak var editDateButton: UIButton!
     @IBOutlet weak var editDistanceButton: UIButton!
 
-    
     /*
     This value is either passed by `TrailTableViewController` in `prepare(for:sender:)`
     or constructed as part of adding a new meal.
@@ -73,6 +72,9 @@ class TrailViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
             distance = trail.distance
             descriptionTextView.text = trail.trailDescription
             descriptionTextView.textColor = trail.descriptionColor
+        } else {
+            trailDate = Date()
+            trailDateLabel.text = dateFormatter.string(from: trailDate!)
         }
         
         // Set up keyboard-triggered scrolling adjustments
