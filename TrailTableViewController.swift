@@ -96,14 +96,17 @@ class TrailTableViewController: UITableViewController {
 
     // MARK: Navigation
 
+    // Prepare the trail view based on the segue.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
         switch(segue.identifier ?? "") {
-            
+        
+        // Preparing to add an item.
         case "AddItem":
             os_log("Adding a new trail.", log: OSLog.default, type: .debug)
             
+        // Preparing to editing an existing view.
         case "ShowDetail":
             guard let trailViewController = segue.destination as? TrailViewController else {
                 fatalError("Unexpected destination: \(segue.destination)")
@@ -117,6 +120,7 @@ class TrailTableViewController: UITableViewController {
                 fatalError("The selected cell is not being displayed by the table")
             }
             
+            // Populate the view with the given trail data.
             let selectedTrail = trails[indexPath.row]
             trailViewController.trail = selectedTrail
             
@@ -127,6 +131,7 @@ class TrailTableViewController: UITableViewController {
     
     // MARK: Actions
     
+    // Respond to unwind segues from TrailViewController.
     @IBAction func unwindToTrailList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? TrailViewController, let trail = sourceViewController.trail {
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
@@ -153,6 +158,7 @@ class TrailTableViewController: UITableViewController {
 
     // MARK: Private Methods
     
+    // Generate three example trails. Note that these trails are just examples and are not reflected in the Health app.
     private func loadSamples() {
         let photo1 = UIImage(named: "trail1")
         let photo2 = UIImage(named: "trail2")
@@ -173,6 +179,7 @@ class TrailTableViewController: UITableViewController {
         trails += [trail1, trail2, trail3]
     }
     
+    // Save the current trails in that exist in the trail list.
     private func saveTrails() {
         let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(trails, toFile: Trail.ArchiveURL.path)
         if isSuccessfulSave {
@@ -182,12 +189,14 @@ class TrailTableViewController: UITableViewController {
         }
     }
     
+    // Load the trails from the archive.
     private func loadTrails() -> [Trail]?  {
         return NSKeyedUnarchiver.unarchiveObject(withFile: Trail.ArchiveURL.path) as? [Trail]
     }
     
+    // Get permission to share distance data with the HealthKit store.
     private func getHealthKitPermission() {
-        // Seek permission through the HealthKitManager.
+        // Seek permission through the HealthKitManager class.
         healthKitManager.authorizeHealthKit {
             (authorized, error) -> Void in
             if !authorized {

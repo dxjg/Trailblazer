@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Your Meals-->
+        <!--Your Trails-->
         <scene sceneID="h33-WW-6l7">
             <objects>
                 <tableViewController id="VaG-HJ-KkO" customClass="TrailTableViewController" customModule="Trailblazer" customModuleProvider="target" sceneMemberID="viewController">
@@ -27,22 +27,18 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="row-6W-I0a">
-                                            <rect key="frame" x="0.0" y="0.0" width="89" height="89"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="thi-UL-kzm">
-                                            <rect key="frame" x="97" y="8" width="270" height="56"/>
+                                            <rect key="frame" x="97" y="8" width="270" height="58.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Trail Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WIy-wP-hXj">
-                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="27.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="270" height="29"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jjL-D3-BRC">
-                                                    <rect key="frame" x="0.0" y="35.5" width="270" height="20.5"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="0.0" y="37" width="270" height="21.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -54,6 +50,10 @@
                                                 <constraint firstItem="jjL-D3-BRC" firstAttribute="leading" secondItem="thi-UL-kzm" secondAttribute="leading" id="Z44-R9-it1"/>
                                             </constraints>
                                         </stackView>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="row-6W-I0a">
+                                            <rect key="frame" x="0.0" y="0.0" width="89" height="89"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="thi-UL-kzm" firstAttribute="leading" secondItem="WaK-UF-8lq" secondAttribute="leading" constant="97" id="NHR-1G-Qs1"/>
@@ -74,7 +74,7 @@
                             <outlet property="delegate" destination="VaG-HJ-KkO" id="tez-CT-DyW"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Your Meals" id="LYw-UJ-Ndg">
+                    <navigationItem key="navigationItem" title="Your Trails" id="LYw-UJ-Ndg">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="XOs-pV-jWq">
                             <connections>
                                 <segue destination="vVv-gC-Vuh" kind="presentation" identifier="AddItem" id="4hu-fs-6JZ"/>
@@ -84,7 +84,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t0C-fx-Xem" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="478" y="139"/>
+            <point key="canvasLocation" x="477.60000000000002" y="138.98050974512745"/>
         </scene>
         <!--New Trail-->
         <scene sceneID="tne-QT-ifu">
@@ -229,7 +229,7 @@
             </objects>
             <point key="canvasLocation" x="2126" y="139"/>
         </scene>
-        <!--Date Picker View Controller-->
+        <!--Trail Date-->
         <scene sceneID="9YA-t7-Cu2">
             <objects>
                 <viewController id="5Ph-aF-046" customClass="DatePickerViewController" customModule="Trailblazer" customModuleProvider="target" sceneMemberID="viewController">
@@ -267,7 +267,7 @@
                             <constraint firstAttribute="trailing" secondItem="s4h-jv-aWS" secondAttribute="trailing" id="mT0-tM-lwM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="BKB-Zb-F0f">
+                    <navigationItem key="navigationItem" title="Trail Date" id="BKB-Zb-F0f">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="uMR-AH-J3n">
                             <connections>
                                 <action selector="cancel:" destination="5Ph-aF-046" id="Lbx-64-oQI"/>
@@ -440,6 +440,6 @@
         <image name="defaultPhoto" width="540" height="540"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="NGN-1O-e2V"/>
+        <segue reference="G54-vk-wz0"/>
     </inferredMetricsTieBreakers>
 </document>

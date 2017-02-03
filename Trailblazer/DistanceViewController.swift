@@ -44,8 +44,8 @@ class DistanceViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Actions
 
-    // Delegate callbacks can't be used because the keyboard does not have a return key.
     @IBAction func dismissKeyboardOnTap(_ sender: UITapGestureRecognizer) {
+        // Delegate callbacks can't be used because the keyboard does not have a return key.
         if let distance = Double(distanceTextField.text ?? "") {
             self.distance = distance
             distanceLabel.text = "\(String(format: "%.2f", distance)) miles"

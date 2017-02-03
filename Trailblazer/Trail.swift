@@ -27,6 +27,7 @@ class Trail: NSObject, NSCoding {
     
     // MARK: Types
     
+    // A struct for containing the keys that access the archive.
     struct PropertyKey {
         static let name = "name"
         static let photo = "photo"
@@ -52,7 +53,7 @@ class Trail: NSObject, NSCoding {
     }
  
     // MARK: NSCoding
-    
+
     func encode(with aCoder: NSCoder) {
         aCoder.encode(name, forKey: PropertyKey.name)
         aCoder.encode(photo, forKey: PropertyKey.photo)

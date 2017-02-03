@@ -20,7 +20,7 @@ class TrailViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     
     // A local variable for storing the actual date object.
     // MARK: !
-    // Eventually replace trailDateLabel with trailDescriptionLabel to include both date and distance.
+    // Eventually replace trailDateLabel with trailDescriptionLabel to include both date and distance. Might need some sort of struct.
     var trailDate: Date?
     var dateFormatter = DateFormatter()
     @IBOutlet weak var trailDateLabel: UILabel!
@@ -62,11 +62,14 @@ class TrailViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
             nameTextField.text = trail.name
             photoImageView.image = trail.photo
             trailDate = trail.date
+            
+            // Format the label text based on whether or not the distance is set.
             if let distance = trail.distance {
                 trailDateLabel.text = "\(dateFormatter.string(from: trail.date!)), \(String(format: "%.2f", distance)) miles"
             } else {
                 trailDateLabel.text = dateFormatter.string(from: trail.date!)
             }
+            
             distance = trail.distance
             descriptionTextView.text = trail.trailDescription
             descriptionTextView.textColor = trail.descriptionColor
@@ -83,7 +86,6 @@ class TrailViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     // MARK: UITextFieldDelegate
@@ -177,8 +179,6 @@ class TrailViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         } else {
             fatalError("An unexpected segue was requested: \(segue.destination)")
         }
-        
-        
     }
 
     // MARK: Actions

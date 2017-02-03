@@ -25,12 +25,14 @@ class DatePickerViewController: UIViewController {
 
     // MARK: Navigation
     
+    // Cancel date selection.
     @IBAction func cancel(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
     
     // MARK: Actions
     
+    // Set the date variable to the date selected by the date picker.
     @IBAction func datePickerChanged(_ sender: UIDatePicker) {
         date = sender.date
     }

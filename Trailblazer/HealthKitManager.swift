@@ -40,6 +40,7 @@ class HealthKitManager {
             fatalError("Unable to obtain HealthKit identifier for distanceWalkingRunning")
         }
         
+        // A set datatype is required for input into the requestAuthorization() function.
         let healthDataToWrite: Set = [distanceWalkingRunningIdentifier]
         
         // Request authorization to read and/or write the specific data.
