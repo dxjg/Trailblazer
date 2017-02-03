@@ -171,7 +171,7 @@ class TrailTableViewController: UITableViewController {
                 trails.append(trail)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
                 
-                os_log("Successfully added a new trail.", log: OSLog.default, type: .debug)
+                os_log("Successfully added a new trail.", log: OSLog.default, type: .debug)x
             }
             
             // Save the trails.
