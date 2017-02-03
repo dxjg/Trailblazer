@@ -85,6 +85,12 @@ class TrailTableViewController: UITableViewController {
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            // Delete the data sample from the HealthKit store if present.
+            if healthKitManager.isAuthorized(), let healthKitSample = trails[indexPath.row].healthKitSample {
+                healthKitManager.deleteDistance(sample: healthKitSample)
+                os_log("Deleted the data from the HealthKit store.", log: OSLog.default, type: .debug)
+            }
+            
             // Delete the row from the data source
             trails.remove(at: indexPath.row)
             saveTrails()
@@ -134,21 +140,38 @@ class TrailTableViewController: UITableViewController {
     // Respond to unwind segues from TrailViewController.
     @IBAction func unwindToTrailList(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? TrailViewController, let trail = sourceViewController.trail {
+            // If the TrailViewController was pushed, then update the table view and HealthKit data, otherwise add new data.
             if let selectedIndexPath = tableView.indexPathForSelectedRow {
+                if healthKitManager.isAuthorized() {
+                    // If there was existing data for this trail, delete it.
+                    if let existingSample = trails[selectedIndexPath.row].healthKitSample {
+                        healthKitManager.deleteDistance(sample: existingSample)
+                    }
+                    
+                    // Add the new data
+                    if let distance = trail.distance {
+                        trail.healthKitSample = healthKitManager.saveDistance(distance: distance, date: trail.date!)
+                    }
+                    
+                    os_log("Updated the HealthKit data.", log: OSLog.default, type: .debug)
+                }
+                
                 // Update an existing trail.
                 trails[selectedIndexPath.row] = trail
                 tableView.reloadRows(at: [selectedIndexPath], with: .none)
             } else {
+                // Add the new trail data to HealthKit only if the new trail has a recorded distance.
+                if healthKitManager.isAuthorized(), let distance = trail.distance {
+                    trail.healthKitSample = healthKitManager.saveDistance(distance: distance, date: trail.date!)
+                }
+                
                 // Add a new trail.
                 let newIndexPath = IndexPath(row: trails.count, section: 0)
                 
                 trails.append(trail)
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
                 
-                // Add the new trail data to HealthKit only if the new trail has a recorded distance.
-                if healthKitManager.isAuthorized(), let distance = trail.distance {
-                    healthKitManager.saveDistance(distance: distance, date: trail.date!)
-                }
+                os_log("Successfully added a new trail.", log: OSLog.default, type: .debug)
             }
             
             // Save the trails.

@@ -8,6 +8,7 @@
 
 import UIKit
 import os.log
+import HealthKit
 
 class Trail: NSObject, NSCoding {
     
@@ -19,6 +20,7 @@ class Trail: NSObject, NSCoding {
     var distance: Double?
     var trailDescription: String
     var descriptionColor: UIColor
+    var healthKitSample: HKQuantitySample?
     
     //MARK: Archiving Paths
     
@@ -35,9 +37,10 @@ class Trail: NSObject, NSCoding {
         static let distance = "distance"
         static let trailDescription = "description"
         static let descriptionColor = "descriptionColor"
+        static let healthKitSample = "healthKitSample"
     }
     
-    init?(name: String, photo: UIImage?, date: Date, distance: Double?, trailDescription: String, descriptionColor: UIColor) {
+    init?(name: String, photo: UIImage?, date: Date, distance: Double?, trailDescription: String, descriptionColor: UIColor, healthKitSample: HKQuantitySample? = nil) {
         // The name cannot be empty.
         guard !name.isEmpty else {
             return nil
@@ -50,6 +53,7 @@ class Trail: NSObject, NSCoding {
         self.distance = distance
         self.trailDescription = trailDescription
         self.descriptionColor = descriptionColor
+        self.healthKitSample = healthKitSample
     }
  
     // MARK: NSCoding
@@ -61,6 +65,7 @@ class Trail: NSObject, NSCoding {
         aCoder.encode(distance, forKey: PropertyKey.distance)
         aCoder.encode(trailDescription, forKey: PropertyKey.trailDescription)
         aCoder.encode(descriptionColor, forKey: PropertyKey.descriptionColor)
+        aCoder.encode(healthKitSample, forKey: PropertyKey.healthKitSample)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
@@ -85,8 +90,10 @@ class Trail: NSObject, NSCoding {
         
         let descriptionColor = aDecoder.decodeObject(forKey: PropertyKey.descriptionColor) as? UIColor ?? UIColor.lightGray
         
+        let healthKitSample = aDecoder.decodeObject(forKey: PropertyKey.healthKitSample) as? HKQuantitySample
+        
         // Must call designated initializer.
-        self.init(name: name, photo: photo, date: date, distance: distance, trailDescription: trailDescription, descriptionColor: descriptionColor)
+        self.init(name: name, photo: photo, date: date, distance: distance, trailDescription: trailDescription, descriptionColor: descriptionColor, healthKitSample: healthKitSample)
     }
     
 }

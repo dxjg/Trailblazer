@@ -55,7 +55,7 @@ class HealthKitManager {
     // MARK: Methods
     
     // Enter a new distance into the HealthKit store.
-    func saveDistance(distance: Double, date: Date) {
+    func saveDistance(distance: Double, date: Date) -> HKQuantitySample {
         // Set the quantity type to the running/walking distance.
         let distanceType = HKQuantityType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning)
         
@@ -69,7 +69,19 @@ class HealthKitManager {
         healthKitHealthStore.save(distance, withCompletion: {
             (success, error) -> Void in
             if error != nil {
-                os_log("An error occurred attempting to save a new distance.", log: OSLog.default, type: .debug)
+                os_log("An error occurred attempting to save a new distance.", log: OSLog.default, type: .error)
+            }
+        })
+        
+        return distance
+    }
+    
+    // Delete an existing distance from the HealthKit store.
+    func deleteDistance(sample: HKQuantitySample) {
+        healthKitHealthStore.delete(sample, withCompletion: {
+            (success, error) -> Void in
+            if error != nil {
+                os_log("An error occurred attempting to delete an existing distance.", log: OSLog.default, type: .error)
             }
         })
     }
