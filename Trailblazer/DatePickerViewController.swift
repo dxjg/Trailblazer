@@ -12,7 +12,7 @@ class DatePickerViewController: UIViewController {
 
     //MARK: Properties
     
-    var date: Date?
+    var date: Date? = Date()
     @IBOutlet weak var datePicker: UIDatePicker!
 
     override func viewDidLoad() {

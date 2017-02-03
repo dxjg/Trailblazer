@@ -63,8 +63,11 @@ class DistanceViewController: UIViewController, UITextFieldDelegate {
     // MARK: Private Methods
     
     private func updateSaveButtonState() {
-        // Disable the Save button if the text field or the date label are empty.
-        let distance = Double(distanceTextField.text ?? "")
-        saveButton.isEnabled = distance != nil
+        // Enable the save button if a valid (a double that is greater than or equal to 0) is entered.
+        if let distance = Double(distanceTextField.text ?? "") {
+            saveButton.isEnabled = distance >= 0
+        } else {
+            saveButton.isEnabled = false
+        }
     }
 }

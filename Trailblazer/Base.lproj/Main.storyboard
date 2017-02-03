@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ABb-2O-ljS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fHr-fR-Zxc">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -137,28 +137,20 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Bhm-kZ-wp4">
-                                                <rect key="frame" x="39.5" y="538" width="296" height="28"/>
+                                                <rect key="frame" x="115.5" y="538" width="144" height="28"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hu-Gj-OJl">
-                                                        <rect key="frame" x="0.0" y="0.0" width="53" height="28"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="56" height="28"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <state key="normal" title="Set Date"/>
+                                                        <state key="normal" title="Edit Date"/>
                                                         <connections>
                                                             <segue destination="3e1-Fl-yDH" kind="presentation" id="oDz-10-cHU"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wy0-aY-Hzd">
-                                                        <rect key="frame" x="61" y="0.0" width="135" height="28"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <state key="normal" title="Reset To Current Date"/>
-                                                        <connections>
-                                                            <action selector="setDefaultDateLabelText:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Mfq-W9-ebi"/>
-                                                        </connections>
-                                                    </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ofK-74-sEg">
-                                                        <rect key="frame" x="204" y="0.0" width="92" height="28"/>
+                                                        <rect key="frame" x="64" y="0.0" width="80" height="28"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                        <state key="normal" title="Add a Distance"/>
+                                                        <state key="normal" title="Edit Distance"/>
                                                         <connections>
                                                             <segue destination="ABb-2O-ljS" kind="presentation" id="VVa-c4-6zx"/>
                                                         </connections>
@@ -212,13 +204,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="addDistanceButton" destination="ofK-74-sEg" id="eVn-q9-k2A"/>
                         <outlet property="descriptionTextView" destination="ecf-0L-c6m" id="pU4-YT-x19"/>
+                        <outlet property="editDateButton" destination="5hu-Gj-OJl" id="f6r-WF-fMA"/>
+                        <outlet property="editDistanceButton" destination="ofK-74-sEg" id="JzO-4p-Etq"/>
                         <outlet property="nameTextField" destination="O32-dW-fHS" id="KSl-zR-GjE"/>
                         <outlet property="photoImageView" destination="GwI-fH-22f" id="Y8D-Cc-xxm"/>
                         <outlet property="saveButton" destination="ySd-7w-lx2" id="U3P-9e-aDV"/>
                         <outlet property="scrollView" destination="Ash-Rp-JGp" id="1Sp-1T-TSo"/>
-                        <outlet property="setDateButton" destination="5hu-Gj-OJl" id="7fw-2q-uhP"/>
                         <outlet property="trailDateLabel" destination="VCG-qw-c5p" id="JXX-0u-wO5"/>
                     </connections>
                 </viewController>

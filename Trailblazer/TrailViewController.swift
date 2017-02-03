@@ -19,7 +19,8 @@ class TrailViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet weak var photoImageView: UIImageView!
     
     // A local variable for storing the actual date object.
-    // ! Eventually replace trailDateLabel with trailDescriptionLabel to include both date and distance.
+    // MARK: !
+    // Eventually replace trailDateLabel with trailDescriptionLabel to include both date and distance.
     var trailDate: Date?
     var dateFormatter = DateFormatter()
     @IBOutlet weak var trailDateLabel: UILabel!
@@ -27,8 +28,9 @@ class TrailViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     @IBOutlet weak var descriptionTextView: UITextView!
     
     @IBOutlet weak var saveButton: UIBarButtonItem!
-    @IBOutlet weak var setDateButton: UIButton!
-    @IBOutlet weak var addDistanceButton: UIButton!
+    @IBOutlet weak var editDateButton: UIButton!
+    @IBOutlet weak var editDistanceButton: UIButton!
+
     
     /*
     This value is either passed by `TrailTableViewController` in `prepare(for:sender:)`
@@ -168,9 +170,9 @@ class TrailViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
             let descriptionColor = descriptionTextView.textColor ?? UIColor.lightGray
             
             trail = Trail(name: name, photo: photo, date: date, distance: distance, trailDescription: trailDescription, descriptionColor: descriptionColor)
-        } else if let button = sender as? UIButton, button === setDateButton {
+        } else if let button = sender as? UIButton, button === editDateButton {
             // Do not need to do anything.
-        } else if let button = sender as? UIButton, button === addDistanceButton {
+        } else if let button = sender as? UIButton, button === editDistanceButton {
             // Do not need to do anything.
         } else {
             fatalError("An unexpected segue was requested: \(segue.destination)")
@@ -196,14 +198,6 @@ class TrailViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
         imagePickerController.delegate = self
         present(imagePickerController, animated: true, completion: nil)
     }
-  
-    // Set the date to the current date.
-    @IBAction func setDefaultDateLabelText(_ sender: UIButton) {
-        let date = Date()
-        trailDate = date
-        trailDateLabel.text = dateFormatter.string(from: date)
-        updateSaveButtonState()
-    }
     
     // Force the first responder to resign by tapping the outermost view.
     @IBAction func dismissKeyboardOnTap(_ sender: UITapGestureRecognizer) {
@@ -211,6 +205,8 @@ class TrailViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
     }
     
     // Set the proper date or distance properties in response to an unwind segue from either the DatePickerViewController or the DistanceViewController.
+    // MARK: !
+    // This is a mess of if-else statements; Need to reimplement this later.
     @IBAction func unwindToTrail(sender: UIStoryboardSegue) {
         if let sourceViewController = sender.source as? DatePickerViewController, let date = sourceViewController.date {
             // Set the date according to the user's selection.
@@ -225,14 +221,26 @@ class TrailViewController: UIViewController, UITextFieldDelegate, UIImagePickerC
             
             updateSaveButtonState()
         } else if let sourceViewController = sender.source as? DistanceViewController, let distance = sourceViewController.distance {
-            // Set the distance according to the user's input.
-            self.distance = distance
-            
-            // Format the label text depending on if a date was recorded yet or not.
-            if let date = trailDate {
-                trailDateLabel.text = "\(dateFormatter.string(from: date)), \(String(format: "%.2f", distance)) miles"
+            if distance == 0 {
+                // A distance of 0 means that the user does not want to record a distance for this trail.
+                self.distance = nil
+                
+                // Format the label text depending on if a date was recorded yet or not.
+                if let date = trailDate {
+                    trailDateLabel.text = dateFormatter.string(from: date)
+                } else {
+                    trailDateLabel.text = ""
+                }
             } else {
-                trailDateLabel.text = String(format: "%.2f", distance)
+                // Set the distance according to the user's input only if the set distance was not 0.
+                self.distance = distance
+                
+                // Format the label text depending on if a date was recorded yet or not.
+                if let date = trailDate {
+                    trailDateLabel.text = "\(dateFormatter.string(from: date)), \(String(format: "%.2f", distance)) miles"
+                } else {
+                    trailDateLabel.text = "\(String(format: "%.2f", distance)) miles"
+                }
             }
         }
     }

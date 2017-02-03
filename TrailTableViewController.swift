@@ -158,7 +158,7 @@ class TrailTableViewController: UITableViewController {
         let photo2 = UIImage(named: "trail2")
         let photo3 = UIImage(named: "trail3")
         
-        guard let trail1 = Trail(name: "Brisk Run In Iceland", photo: photo1, date: Date() - 100000, distance: nil, trailDescription: "It was a pretty cold run.", descriptionColor: UIColor.black) else {
+        guard let trail1 = Trail(name: "Brisk Run In Iceland", photo: photo1, date: Date() - 100000, distance: 10.4, trailDescription: "It was a pretty cold run.", descriptionColor: UIColor.black) else {
             fatalError("Unable to instantiate trail1")
         }
         
