@@ -23,6 +23,7 @@ class HealthKitManager {
         if healthKitHealthStore.authorizationStatus(for: HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.distanceWalkingRunning)!) == .sharingAuthorized {
             return true
         } else {
+            os_log("This devie is not authorized for sharing HealthKit data.")
             return false
         }
     }
